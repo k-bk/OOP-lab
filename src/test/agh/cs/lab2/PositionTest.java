@@ -4,14 +4,17 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class MapDirectionTest {
+public class PositionTest {
     @Test
-    public void next() throws Exception {
-
+    public void smaller() throws Exception {
     }
 
     @Test
-    public void previous() throws Exception {
+    public void larger() throws Exception {
+    }
+
+    @Test
+    public void add() throws Exception {
     }
 
     @Test
