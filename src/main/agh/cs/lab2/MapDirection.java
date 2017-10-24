@@ -1,5 +1,7 @@
 package agh.cs.lab2;
 
+import javafx.geometry.Pos;
+
 public enum MapDirection {
     North, South, West, East;
 
@@ -21,6 +23,16 @@ public enum MapDirection {
             case West:  return South;
         }
         return North;
+    }
+
+    public Position toPosition() {
+        switch(this) {
+            case North: return new Position(0,-1);
+            case South: return new Position(0,1);
+            case East: return new Position(1,0);
+            case West: return new Position(-1,0);
+        }
+        return new Position(0,0);
     }
 
     public String toString() {
