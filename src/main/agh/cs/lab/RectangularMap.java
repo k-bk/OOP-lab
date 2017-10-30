@@ -1,5 +1,6 @@
 package agh.cs.lab;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RectangularMap implements IWorldMap {
@@ -7,7 +8,7 @@ public class RectangularMap implements IWorldMap {
     private int height;
     private Position limitMax;
     private Position limitMin;
-    private List<Car> cars;
+    private List<Car> cars = new ArrayList<>();
 
     RectangularMap(int width, int height) {
         this.width = width;
@@ -36,7 +37,10 @@ public class RectangularMap implements IWorldMap {
 
     @Override
     public void run(MoveDirection[] directions) {
-
+        for(int i = 0; i < directions.length; i++) {
+            Car tmp = cars.get(i % cars.size());
+            tmp.move(directions[i]);
+        }
     }
 
     @Override
