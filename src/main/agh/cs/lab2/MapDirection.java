@@ -23,6 +23,16 @@ public enum MapDirection {
         return North;
     }
 
+    public Position toPosition() {
+        switch(this) {
+            case North: return new Position(0,1);
+            case South: return new Position(0,-1);
+            case East:  return new Position(1,0);
+            case West:  return new Position(-1,0);
+        }
+        return new Position(0,0);
+    }
+
     public String toString() {
         switch(this) {
             case North: return "Północ";

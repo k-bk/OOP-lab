@@ -2,20 +2,27 @@ package agh.cs.lab2;
 
 import org.junit.Test;
 
+import java.util.Map;
+
 import static org.junit.Assert.*;
 
 public class MapDirectionTest {
-    @Test
-    public void next() throws Exception {
 
+    private MapDirection dir = MapDirection.East;
+
+    @Test
+    public void testNext() throws Exception {
+        assertEquals(MapDirection.South, dir.next());
     }
 
     @Test
-    public void previous() throws Exception {
+    public void testPrevious() throws Exception {
+        assertEquals(MapDirection.North, dir.previous());
     }
 
     @Test
-    public void toString() throws Exception {
+    public void testToString() throws Exception {
+        assertEquals("Wschód", dir.toString());
     }
 
 }
