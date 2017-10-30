@@ -29,6 +29,10 @@ public class Position {
         return new Position(this.x + a.x, this.y + a.y);
     }
 
+    Position sub(Position a) {
+        return new Position(this.x - a.x, this.y - a.y);
+    }
+
     public String toString() {
         return "(" + x + ", " + y + ")";
     }
