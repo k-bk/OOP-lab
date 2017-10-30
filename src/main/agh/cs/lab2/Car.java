@@ -24,7 +24,7 @@ public class Car {
         if(newPos.larger(limitA) && newPos.smaller(limitB))
             position = newPos;
     }
-    @Override
+
     public String toString() {
         return "Samochód: " + direction + " " + position;
     }
