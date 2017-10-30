@@ -1,8 +1,6 @@
-package agh.cs.lab2;
+package agh.cs.lab;
 
 import org.junit.Test;
-
-import java.util.Map;
 
 import static org.junit.Assert.*;
 

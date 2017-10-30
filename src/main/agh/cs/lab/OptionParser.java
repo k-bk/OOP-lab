@@ -1,7 +1,6 @@
-package agh.cs.lab2;
+package agh.cs.lab;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class OptionParser {
 
