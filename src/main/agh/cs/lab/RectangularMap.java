@@ -52,4 +52,9 @@ public class RectangularMap implements IWorldMap {
     public Object objectAt(Position position) {
         return null;
     }
+
+    public String toString() {
+        MapVisualizer mapVisualizer = new MapVisualizer();
+        return mapVisualizer.dump(this, limitMin, limitMax);
+    }
 }
