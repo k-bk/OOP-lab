@@ -5,13 +5,10 @@ import java.util.ArrayList;
 public class CarSystem {
 
     public static void main(String[] args) {
-        Car car = new Car();
-        OptionParser optionParser = new OptionParser();
-        ArrayList<MoveDirection> moves = optionParser.parser(args);
-
-        for(MoveDirection m : moves) {
-            car.move(m);
-            System.out.println(car);
-        }
+        MoveDirection[] directions = new OptionsParser().parse(args);
+        IWorldMap map = new RectangularMap(10, 5);
+        map.place(new Car(map));
+        map.place(new Car(map,3,4));
+        map.run(directions);
     }
 }

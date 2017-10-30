@@ -2,9 +2,9 @@ package agh.cs.lab;
 
 import java.util.ArrayList;
 
-public class OptionParser {
+public class OptionsParser {
 
-    public ArrayList<MoveDirection> parser (String[] options) {
+    public MoveDirection[] parse (String[] options) {
         ArrayList<MoveDirection> moves = new ArrayList<MoveDirection>();
         for(String s : options) {
             switch(s) {
@@ -25,7 +25,11 @@ public class OptionParser {
                     moves.add(MoveDirection.Right);
             }
         }
-        return moves;
+        MoveDirection[] output = new MoveDirection[moves.size()];
+        for(int i = 0; i < moves.size(); i++) {
+            output[i] = moves.get(i);
+        }
+        return output;
     }
 
 }

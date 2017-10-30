@@ -5,6 +5,21 @@ public class Car {
     private Position position = new Position(2,2);
     private Position limitA = new Position(0, 0);
     private Position limitB = new Position(4, 4);
+    private IWorldMap map;
+
+    Car(IWorldMap map) {
+        this.map = map;
+    }
+
+    Car(IWorldMap map, int x, int y) {
+        this.map = map;
+        this.position = new Position(x, y);
+        map.place(this);
+    }
+
+    public Position getPosition() {
+        return position;
+    }
 
     public void move(MoveDirection direction) {
         Position newPos = position;
@@ -21,11 +36,11 @@ public class Car {
             case Backward:
                 newPos = position.sub(this.direction.toPosition());
         }
-        if(newPos.larger(limitA) && newPos.smaller(limitB))
+        if(map.canMoveTo(newPos))
             position = newPos;
     }
 
     public String toString() {
-        return "Samochód: " + direction + " " + position;
+        return direction.toChar();
     }
 }

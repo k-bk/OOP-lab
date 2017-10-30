@@ -42,4 +42,14 @@ public enum MapDirection {
         }
         return "";
     }
+
+    public String toChar() {
+        switch(this) {
+            case North: return "N";
+            case South: return "S";
+            case East:  return "E";
+            case West:  return "W";
+        }
+        return "";
+    }
 }
