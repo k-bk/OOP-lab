@@ -19,11 +19,9 @@ public class RectangularMap implements IWorldMap {
 
     @Override
     public boolean canMoveTo(Position position) {
-        if(position.larger(limitMin)
+        return position.larger(limitMin)
                 && position.smaller(limitMax)
-                && !(isOccupied(position)))
-            return true;
-        return false;
+                && !(isOccupied(position));
     }
 
     @Override
@@ -54,6 +52,10 @@ public class RectangularMap implements IWorldMap {
 
     @Override
     public Object objectAt(Position position) {
+        for(Car c : cars) {
+            if(position.equals(c.getPosition()))
+                return c;
+        }
         return null;
     }
 
