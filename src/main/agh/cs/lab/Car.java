@@ -1,6 +1,8 @@
 package agh.cs.lab;
 
-public class Car {
+import com.sun.javafx.tk.Toolkit;
+
+public class Car implements IMapElement {
     private MapDirection direction = MapDirection.North;
     private Position position = new Position(2,2);
     private Position limitA = new Position(0, 0);

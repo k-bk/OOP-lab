@@ -1,6 +1,6 @@
 package agh.cs.lab;
 
-public class HayStack {
+public class HayStack implements IMapElement {
     private Position position;
 
     public HayStack (Position position) {
@@ -12,6 +12,6 @@ public class HayStack {
     }
 
     public String toString() {
-        return "S";
+        return "#";
     }
 }

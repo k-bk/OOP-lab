@@ -3,9 +3,8 @@ package agh.cs.lab;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UnboundedMap implements IWorldMap {
+public class UnboundedMap extends AbstractWorldMap {
 
-    private List<Car> cars = new ArrayList<>();
     private List<HayStack> hayStacks;
 
     public UnboundedMap(List<HayStack> hayStacks) {
@@ -14,33 +13,13 @@ public class UnboundedMap implements IWorldMap {
 
     @Override
     public boolean canMoveTo(Position position) {
-        return isOccupied(position);
-    }
-
-    @Override
-    public boolean place(Car car) {
-        if(canMoveTo(car.getPosition())) {
-            cars.add(car);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public void run(MoveDirection[] directions) {
-        if(cars.size() > 0)
-            for(int i = 0; i < directions.length; i++) {
-                Car tmp = cars.get(i % cars.size());
-                tmp.move(directions[i]);
-            }
+        return !(isOccupied(position));
     }
 
     @Override
     public boolean isOccupied(Position position) {
-        for(Car c : cars) {
-            if(position.equals(c.getPosition()))
-                return true;
-        }
+        if(super.isOccupied(position))
+            return true;
         for(HayStack h : hayStacks) {
             if(position.equals(h.getPosition()))
                 return true;
@@ -50,32 +29,33 @@ public class UnboundedMap implements IWorldMap {
 
     @Override
     public Object objectAt(Position position) {
-        for(Car c : cars) {
-            if(position.equals(c.getPosition()))
-                return c;
-        }
-        for(HayStack h : hayStacks) {
-            if(position.equals(h.getPosition()))
+        Object object = super.objectAt(position);
+        if(object != null)
+            return object;
+        for (HayStack h : hayStacks) {
+            if (position.equals(h.getPosition()))
                 return h;
         }
         return null;
     }
 
+    @Override
     public String toString() {
         if(cars.size() > 0) {
             Position tmp = cars.get(1).getPosition();
-            Position lowerLeft = new Position(tmp.x, tmp.y);
-            Position upperRight = new Position(tmp.x, tmp.y);
+            int xmin = tmp.x;
+            int ymin = tmp.y;
+            int xmax = tmp.x;
+            int ymax = tmp.y;
             for(Car c : cars) {
-                int xmin = Math.min(lowerLeft.x, c.getPosition().x);
-                int ymin = Math.min(lowerLeft.y, c.getPosition().y);
-                lowerLeft = new Position(xmin, ymin);
-                int xmax = Math.max(lowerLeft.x, c.getPosition().x);
-                int ymax = Math.max(lowerLeft.y, c.getPosition().y);
-                upperRight = new Position(xmax, ymax);
+                xmin = Math.min(xmin, c.getPosition().x);
+                ymin = Math.min(ymin, c.getPosition().y);
+                xmax = Math.max(xmax, c.getPosition().x);
+                ymax = Math.max(ymax, c.getPosition().y);
             }
-            MapVisualizer mapVisualizer = new MapVisualizer();
-            return mapVisualizer.dump(this, lowerLeft, upperRight);
+            lowerLeft = new Position(xmin, ymin);
+            upperRight = new Position(xmax, ymax);
+            return super.toString();
         }
         return "";
     }
