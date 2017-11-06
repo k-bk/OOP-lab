@@ -11,6 +11,8 @@ public class ActionParser {
             } else if(s.equals("backward") || s.equals("b")) {
                 MoveDirection newMove = MoveDirection.Backward;
                 moves.add(newMove);
+            } else {
+                throw new IllegalArgumentException(s + " is not legal move specification");
             }
         }
         return moves;

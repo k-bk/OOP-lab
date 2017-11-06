@@ -5,10 +5,12 @@ import java.util.List;
 
 public class UnboundedMap extends AbstractWorldMap {
 
-    private List<HayStack> hayStacks;
+    private List<HayStack> hayStacks = new ArrayList<HayStack>();
 
-    public UnboundedMap(List<HayStack> hayStacks) {
-        this.hayStacks = hayStacks;
+    public UnboundedMap(List<HayStack> hayStackList) {
+        for(HayStack h : hayStackList) {
+            place(h);
+        }
     }
 
     @Override
@@ -18,25 +20,28 @@ public class UnboundedMap extends AbstractWorldMap {
 
     @Override
     public boolean isOccupied(Position position) {
-        if(super.isOccupied(position))
-            return true;
         for(HayStack h : hayStacks) {
             if(position.equals(h.getPosition()))
                 return true;
+        }
+        return super.isOccupied(position);
+    }
+
+    public boolean place(HayStack hayStack) {
+        if(!isOccupied(hayStack.getPosition())) {
+            hayStacks.add(hayStack);
+            return true;
         }
         return false;
     }
 
     @Override
     public Object objectAt(Position position) {
-        Object object = super.objectAt(position);
-        if(object != null)
-            return object;
         for (HayStack h : hayStacks) {
             if (position.equals(h.getPosition()))
                 return h;
         }
-        return null;
+        return super.objectAt(position);
     }
 
     @Override

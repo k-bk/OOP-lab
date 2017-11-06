@@ -1,18 +1,19 @@
 package agh.cs.lab;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 abstract class AbstractWorldMap implements IWorldMap {
-    protected List<Car> cars = new ArrayList<>();
+    protected Map<Position, Car> cars = new HashMap<>();
     protected Position lowerLeft;
     protected Position upperRight;
 
     public boolean place(Car car) {
-        if(canMoveTo(car.getPosition())) {
-            cars.add(car);
+        if(!isOccupied(car.getPosition())) {
+            cars.put(car.getPosition(), car);
             return true;
         }
+        //throw new IllegalArgumentException(car.getPosition() + " is already occupied");
         return false;
     }
 
@@ -25,19 +26,11 @@ abstract class AbstractWorldMap implements IWorldMap {
     }
 
     public Object objectAt(Position position) {
-        for(Car c : cars) {
-            if(position.equals(c.getPosition()))
-                return c;
-        }
-        return null;
+        return cars.get(position);
     }
 
     public boolean isOccupied(Position position) {
-        for(Car c : cars) {
-            if(position.equals(c.getPosition()))
-                return true;
-        }
-        return false;
+        return cars.containsKey(position);
     }
 
     public String toString() {
