@@ -12,20 +12,14 @@ public class CarSystem {
         hayStackList.add(new HayStack(new Position(7,7)));
         hayStackList.add(new HayStack(new Position(3,6)));
         hayStackList.add(new HayStack(new Position(2,0)));
-        IWorldMap map;
-        try {
-            map = new UnboundedMap(hayStackList);
+        //try {
+            IWorldMap map = new UnboundedMap(hayStackList);
             map.place(new Car(map));
             map.place(new Car(map,0,0));
-        } catch(IllegalArgumentException e) {
-
-        }
-        System.out.println(map);
-        try {
+            System.out.println(map);
             map.run(directions);
-        } catch(IllegalArgumentException e){
-
-        }
-        System.out.println(map);
+            System.out.println(map);
+        //} catch(IllegalArgumentException e) {
+        //}
     }
 }

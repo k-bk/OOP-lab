@@ -1,11 +1,8 @@
 package agh.cs.lab;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class UnboundedMap extends AbstractWorldMap {
-
-    private List<HayStack> hayStacks = new ArrayList<HayStack>();
 
     public UnboundedMap(List<HayStack> hayStackList) {
         for(HayStack h : hayStackList) {
@@ -19,32 +16,6 @@ public class UnboundedMap extends AbstractWorldMap {
     }
 
     @Override
-    public boolean isOccupied(Position position) {
-        for(HayStack h : hayStacks) {
-            if(position.equals(h.getPosition()))
-                return true;
-        }
-        return super.isOccupied(position);
-    }
-
-    public boolean place(HayStack hayStack) {
-        if(!isOccupied(hayStack.getPosition())) {
-            hayStacks.add(hayStack);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public Object objectAt(Position position) {
-        for (HayStack h : hayStacks) {
-            if (position.equals(h.getPosition()))
-                return h;
-        }
-        return super.objectAt(position);
-    }
-
-    @Override
     public String toString() {
         if(cars.size() > 0) {
             Position tmp = cars.get(1).getPosition();
@@ -52,7 +23,7 @@ public class UnboundedMap extends AbstractWorldMap {
             int ymin = tmp.y;
             int xmax = tmp.x;
             int ymax = tmp.y;
-            for(Car c : cars) {
+            for(Car c : cars.values()) {
                 xmin = Math.min(xmin, c.getPosition().x);
                 ymin = Math.min(ymin, c.getPosition().y);
                 xmax = Math.max(xmax, c.getPosition().x);
