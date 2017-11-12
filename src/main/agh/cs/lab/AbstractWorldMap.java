@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 abstract class AbstractWorldMap implements IWorldMap {
-    protected Map<Position, IMapElement> mapElements = new HashMap<>();
     protected Map<Position, Car> cars = new HashMap<>();
     protected Position lowerLeft;
     protected Position upperRight;
@@ -12,24 +11,15 @@ abstract class AbstractWorldMap implements IWorldMap {
     public boolean place(Car car) {
         if(!isOccupied(car.getPosition())) {
             cars.put(car.getPosition(), car);
-            mapElements.put(car.getPosition(), car);
             return true;
         } else {
-            throw new IllegalArgumentException(car.getPosition() + " is already occupied");
+            throw new IllegalArgumentException(car.getPosition() + " is already occupied by " + objectAt(car.getPosition()));
         }
     }
 
-    public boolean place(IMapElement element) {
-        if(!isOccupied(element.getPosition())) {
-            mapElements.put(element.getPosition(), element);
-            return true;
-        } else {
-            throw new IllegalArgumentException(element.getPosition() + " is already occupied");
-        }
-    }
 
     public void run(MoveDirection[] directions) {
-        for(int i = 0; i < directions.length; i += mapElements.size()) {
+        for(int i = 0; i < directions.length; i += cars.size()) {
             for(Car c: cars.values()) {
                 if(i < directions.length)
                     c.move(directions[i]);
@@ -38,11 +28,12 @@ abstract class AbstractWorldMap implements IWorldMap {
     }
 
     public Object objectAt(Position position) {
-        return mapElements.get(position);
+        System.out.println("Check pos: " + position + " occupied" + isOccupied(position));
+        return cars.get(position);
     }
 
     public boolean isOccupied(Position position) {
-        return mapElements.containsKey(position);
+        return cars.containsKey(position);
     }
 
     public String toString() {

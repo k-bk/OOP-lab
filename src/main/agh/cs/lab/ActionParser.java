@@ -1,7 +1,7 @@
 package agh.cs.lab;
 import java.util.*;
 
-public class ActionParser {
+class ActionParser {
     public List<MoveDirection> parse(String[] actions) {
         List<MoveDirection> moves = new ArrayList<>();
         for(String s : actions) {

@@ -4,12 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RectangularMap extends AbstractWorldMap {
-    private int width;
-    private int height;
 
     RectangularMap(int width, int height) {
-        this.width = width;
-        this.height = height;
         this.upperRight = new Position(width - 1, height - 1);
         this.lowerLeft = new Position(0,0);
     }

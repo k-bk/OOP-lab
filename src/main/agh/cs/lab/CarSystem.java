@@ -14,8 +14,9 @@ public class CarSystem {
         hayStackList.add(new HayStack(new Position(2,0)));
         //try {
             IWorldMap map = new UnboundedMap(hayStackList);
-            map.place(new Car(map));
-            map.place(new Car(map,0,0));
+            //IWorldMap map = new RectangularMap(5, 7);
+            map.place(new Car(map, 10, 10));
+            map.place(new Car(map,5,0));
             System.out.println(map);
             map.run(directions);
             System.out.println(map);

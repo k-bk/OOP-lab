@@ -1,6 +1,6 @@
 package agh.cs.lab;
 
-public class HayStack implements IMapElement {
+public class HayStack {
     private Position position;
 
     public HayStack (Position position) {
