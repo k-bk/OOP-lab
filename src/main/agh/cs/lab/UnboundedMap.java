@@ -35,9 +35,8 @@ public class UnboundedMap extends AbstractWorldMap {
 
     @Override
     public Object objectAt(Position position) {
-        if(hayStacks.get(position) != null) {
+        if(hayStacks.containsKey(position))
             return hayStacks.get(position);
-        }
         return super.objectAt(position);
     }
 
@@ -55,8 +54,6 @@ public class UnboundedMap extends AbstractWorldMap {
             }
             lowerLeft = min;
             upperRight = max;
-            System.out.println(min);
-            System.out.println(max);
             return super.toString();
         }
         return "";

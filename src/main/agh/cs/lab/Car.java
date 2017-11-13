@@ -18,7 +18,7 @@ public class Car {
         return position;
     }
 
-    public void move(MoveDirection direction) {
+    public boolean move(MoveDirection direction) {
         Position newPos = position;
         switch(direction) {
             case Left:
@@ -33,8 +33,11 @@ public class Car {
             case Backward:
                 newPos = position.sub(this.direction.toPosition());
         }
-        if(map.canMoveTo(newPos))
+        if(map.canMoveTo(newPos)) {
             position = newPos;
+            return true;
+        }
+        return false;
     }
 
     public String toString() {

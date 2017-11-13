@@ -16,6 +16,7 @@ public class Position {
         return this.x >= a.x && this.y >= a.y;
     }
 
+    @Override
     public boolean equals(Object other) {
         if(this == other)
             return true;
@@ -23,6 +24,11 @@ public class Position {
             return false;
         Position that = (Position) other;
         return (this.x == that.x && this.y == that.y);
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 
     Position add(Position a) {
